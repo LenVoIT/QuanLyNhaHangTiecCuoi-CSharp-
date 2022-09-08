@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLNhaHang" Class="DBQuanLyNhaHangDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LV\SQLEXPRESS;Initial Catalog=QLNhaHang;Integrated Security=True" SettingsObjectName="QLNhaHangTiecCuoi.Properties.Settings" SettingsPropertyName="QLNhaHangConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ACCOUNT" Member="ACCOUNTs">
+    <Type Name="ACCOUNT">
+      <Column Name="UserName" Type="System.String" DbType="Char(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PassWord" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="TypeUser" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Association Name="ACCOUNT_KHACHHANG" Member="KHACHHANGs" ThisKey="UserName" OtherKey="UserName" Type="KHACHHANG" />
+      <Association Name="ACCOUNT_NHANVIEN" Member="NHANVIENs" ThisKey="UserName" OtherKey="UserName" Type="NHANVIEN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Sanh" Member="Sanhs">
+    <Type Name="Sanh">
+      <Column Name="MaSanh" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenSanh" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Tang" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="DonGia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="SucChua" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Sanh_DATTIEC" Member="DATTIECs" ThisKey="MaSanh" OtherKey="MaSanh" Type="DATTIEC" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BOPHAN" Member="BOPHANs">
+    <Type Name="BOPHAN">
+      <Column Name="MaBP" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenBP" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SoLuongNV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="BOPHAN_NHANVIEN" Member="NHANVIENs" ThisKey="MaBP" OtherKey="MaBP" Type="NHANVIEN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DATDICHVU" Member="DATDICHVUs">
+    <Type Name="DATDICHVU">
+      <Column Name="MaTiec" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaDV" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="DATTIEC_DATDICHVU" Member="DATTIEC" ThisKey="MaTiec" OtherKey="MaTiec" Type="DATTIEC" IsForeignKey="true" />
+      <Association Name="DATTIEC_DATDICHVU1" Member="DATTIEC1" ThisKey="MaTiec" OtherKey="MaTiec" Type="DATTIEC" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="DICHVU_DATDICHVU" Member="DICHVU" ThisKey="MaDV" OtherKey="MaDV" Type="DICHVU" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DATMONAN" Member="DATMONANs">
+    <Type Name="DATMONAN">
+      <Column Name="MaTiec" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaMA" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="DATTIEC_DATMONAN" Member="DATTIEC" ThisKey="MaTiec" OtherKey="MaTiec" Type="DATTIEC" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="DATTIEC_DATMONAN1" Member="DATTIEC1" ThisKey="MaTiec" OtherKey="MaTiec" Type="DATTIEC" IsForeignKey="true" />
+      <Association Name="MONAN_DATMONAN" Member="MONAN" ThisKey="MaMA" OtherKey="MaMA" Type="MONAN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DATTIEC" Member="DATTIECs">
+    <Type Name="DATTIEC">
+      <Column Name="MaTiec" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenTiec" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MaSanh" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="MaNV" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="MaKH" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="NgayDat" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NgayToChuc" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SoLuongBan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoLuongKhach" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Buoi" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="TinhTrang" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="DATTIEC_DATDICHVU" Member="DATDICHVUs" ThisKey="MaTiec" OtherKey="MaTiec" Type="DATDICHVU" />
+      <Association Name="DATTIEC_DATDICHVU1" Member="DATDICHVUs1" ThisKey="MaTiec" OtherKey="MaTiec" Type="DATDICHVU" />
+      <Association Name="DATTIEC_DATMONAN" Member="DATMONANs" ThisKey="MaTiec" OtherKey="MaTiec" Type="DATMONAN" />
+      <Association Name="DATTIEC_DATMONAN1" Member="DATMONANs1" ThisKey="MaTiec" OtherKey="MaTiec" Type="DATMONAN" />
+      <Association Name="DATTIEC_HOADON" Member="HOADONs" ThisKey="MaTiec" OtherKey="MaTiec" Type="HOADON" />
+      <Association Name="Sanh_DATTIEC" Member="Sanh" ThisKey="MaSanh" OtherKey="MaSanh" Type="Sanh" IsForeignKey="true" />
+      <Association Name="KHACHHANG_DATTIEC" Member="KHACHHANG" ThisKey="MaKH" OtherKey="MaKH" Type="KHACHHANG" IsForeignKey="true" />
+      <Association Name="NHANVIEN_DATTIEC" Member="NHANVIEN" ThisKey="MaNV" OtherKey="MaNV" Type="NHANVIEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DICHVU" Member="DICHVUs">
+    <Type Name="DICHVU">
+      <Column Name="MaDV" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenDV" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DonGia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="DICHVU_DATDICHVU" Member="DATDICHVUs" ThisKey="MaDV" OtherKey="MaDV" Type="DATDICHVU" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HOADON" Member="HOADONs">
+    <Type Name="HOADON">
+      <Column Name="MaHD" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MaTiec" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="TinhTrang" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgayLap" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="DATTIEC_HOADON" Member="DATTIEC" ThisKey="MaTiec" OtherKey="MaTiec" Type="DATTIEC" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KHACHHANG" Member="KHACHHANGs">
+    <Type Name="KHACHHANG">
+      <Column Name="MaKH" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenKH" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GioiTinh" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="CMND" Type="System.String" DbType="Char(15)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="Char(11)" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Association Name="KHACHHANG_DATTIEC" Member="DATTIECs" ThisKey="MaKH" OtherKey="MaKH" Type="DATTIEC" />
+      <Association Name="ACCOUNT_KHACHHANG" Member="ACCOUNT" ThisKey="UserName" OtherKey="UserName" Type="ACCOUNT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MONAN" Member="MONANs">
+    <Type Name="MONAN">
+      <Column Name="MaMA" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenMa" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DonGia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="Loai" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DonViTinh" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="MONAN_DATMONAN" Member="DATMONANs" ThisKey="MaMA" OtherKey="MaMA" Type="DATMONAN" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NHANVIEN" Member="NHANVIENs">
+    <Type Name="NHANVIEN">
+      <Column Name="MaNV" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenNV" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SDT" Type="System.String" DbType="Char(11)" CanBeNull="true" />
+      <Column Name="CMND" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="MaBP" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="ChucVu" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Luong" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Association Name="NHANVIEN_DATTIEC" Member="DATTIECs" ThisKey="MaNV" OtherKey="MaNV" Type="DATTIEC" />
+      <Association Name="ACCOUNT_NHANVIEN" Member="ACCOUNT" ThisKey="UserName" OtherKey="UserName" Type="ACCOUNT" IsForeignKey="true" />
+      <Association Name="BOPHAN_NHANVIEN" Member="BOPHAN" ThisKey="MaBP" OtherKey="MaBP" Type="BOPHAN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.ListDichVuDat" Method="ListDichVuDat">
+    <Parameter Name="MaTiec" Parameter="maTiec" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="ListDichVuDatResult">
+      <Column Name="MaDV" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="TenDV" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DonGia" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="isDeleted" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TongThanhTien" Method="TongThanhTien" IsComposable="true">
+    <Parameter Name="maTiec" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.pr_AddAccount" Method="pr_AddAccount">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="PassWord" Parameter="passWord" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="TypeUser" Parameter="typeUser" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddBoPhan" Method="pr_AddBoPhan">
+    <Parameter Name="TenBP" Parameter="tenBP" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddDatDV" Method="pr_AddDatDV">
+    <Parameter Name="MaTiec" Parameter="maTiec" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="MaDV" Parameter="maDV" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddDatMon" Method="pr_AddDatMon">
+    <Parameter Name="MaTiec" Parameter="maTiec" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="MaMA" Parameter="maMA" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="SoLuong" Parameter="soLuong" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddDatSanh" Method="pr_AddDatSanh">
+    <Parameter Name="MaTiec" Parameter="maTiec" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="MaSanh" Parameter="maSanh" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="NgayToChuc" Parameter="ngayToChuc" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="Buoi" Parameter="buoi" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_addDatTiec" Method="pr_addDatTiec">
+    <Parameter Name="MaKH" Parameter="maKH" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="TenTiec" Parameter="tenTiec" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="SLBan" Parameter="sLBan" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SLKhach" Parameter="sLKhach" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddDichVu" Method="pr_AddDichVu">
+    <Parameter Name="TenDV" Parameter="tenDV" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="DonGia" Parameter="donGia" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_addHoaDon" Method="pr_addHoaDon">
+    <Parameter Name="MaTiec" Parameter="maTiec" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddKhachHang" Method="pr_AddKhachHang">
+    <Parameter Name="TenKH" Parameter="tenKH" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="GioiTinh" Parameter="gioiTinh" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="CMND" Parameter="cMND" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="SDT" Parameter="sDT" Type="System.String" DbType="Char(11)" />
+    <Parameter Name="DiaChi" Parameter="diaChi" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="PassWord" Parameter="passWord" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddMonAn" Method="pr_AddMonAn">
+    <Parameter Name="TenMA" Parameter="tenMA" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="DonGia" Parameter="donGia" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="Loai" Parameter="loai" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="DonViTinh" Parameter="donViTinh" Type="System.String" DbType="NVarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddNhanVien" Method="pr_AddNhanVien">
+    <Parameter Name="TenNV" Parameter="tenNV" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="SDT" Parameter="sDT" Type="System.String" DbType="Char(11)" />
+    <Parameter Name="CMND" Parameter="cMND" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="MaBP" Parameter="maBP" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="ChucVu" Parameter="chucVu" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Luong" Parameter="luong" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="PassWord" Parameter="passWord" Type="System.String" DbType="Char(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddSanh" Method="pr_AddSanh">
+    <Parameter Name="TenSanh" Parameter="tenSanh" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Tang" Parameter="tang" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="DonGia" Parameter="donGia" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="SucChua" Parameter="sucChua" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_SuaBoPhan" Method="pr_SuaBoPhan">
+    <Parameter Name="MaBP" Parameter="maBP" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="TenBP" Parameter="tenBP" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_SuaDatMon" Method="pr_SuaDatMon">
+    <Parameter Name="MaTiec" Parameter="maTiec" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="MaMA" Parameter="maMA" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="SoLuong" Parameter="soLuong" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_SuaDichVu" Method="pr_SuaDichVu">
+    <Parameter Name="MaDV" Parameter="maDV" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="TenDV" Parameter="tenDV" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="DonGia" Parameter="donGia" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_SuaKhachhang" Method="pr_SuaKhachhang">
+    <Parameter Name="MaKH" Parameter="maKH" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="TenKH" Parameter="tenKH" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="GioiTinh" Parameter="gioiTinh" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="CMND" Parameter="cMND" Type="System.String" DbType="Char(15)" />
+    <Parameter Name="SoDT" Parameter="soDT" Type="System.String" DbType="Char(11)" />
+    <Parameter Name="DiaChi" Parameter="diaChi" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_SuaMonAn" Method="pr_SuaMonAn">
+    <Parameter Name="MaMA" Parameter="maMA" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="TenMA" Parameter="tenMA" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Gia" Parameter="gia" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="Loai" Parameter="loai" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="DonViTinh" Parameter="donViTinh" Type="System.String" DbType="NVarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_SuaNhanVien" Method="pr_SuaNhanVien">
+    <Parameter Name="MaNV" Parameter="maNV" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="TenNV" Parameter="tenNV" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="SDT" Parameter="sDT" Type="System.String" DbType="Char(11)" />
+    <Parameter Name="CMND" Parameter="cMND" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="MaBP" Parameter="maBP" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="ChucVu" Parameter="chucVu" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Luong" Parameter="luong" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_SuaSanh" Method="pr_SuaSanh">
+    <Parameter Name="MaSanh" Parameter="maSanh" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="TenSanh" Parameter="tenSanh" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Tang" Parameter="tang" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="DonGia" Parameter="donGia" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="SucChua" Parameter="sucChua" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_Xoa1DatDichVu" Method="pr_Xoa1DatDichVu">
+    <Parameter Name="maTiec" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="maDV" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_Xoa1DatMonAn" Method="pr_Xoa1DatMonAn">
+    <Parameter Name="maTiec" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="maMonAn" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaAccount" Method="pr_XoaAccount">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="Char(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaAllDatDichVu" Method="pr_XoaAllDatDichVu">
+    <Parameter Name="maTiec" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaAllDatMonAn" Method="pr_XoaAllDatMonAn">
+    <Parameter Name="maTiec" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaBP" Method="pr_XoaBP">
+    <Parameter Name="MaBP" Parameter="maBP" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaDatTiec" Method="pr_XoaDatTiec">
+    <Parameter Name="maTiec" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaHoaDon" Method="pr_XoaHoaDon">
+    <Parameter Name="maTiec" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaKhachHang" Method="pr_XoaKhachHang">
+    <Parameter Name="MaKH" Parameter="maKH" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaNhanVien" Method="pr_XoaNhanVien">
+    <Parameter Name="MaNV" Parameter="maNV" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaSanh" Method="pr_XoaSanh">
+    <Parameter Name="maSanh" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaThucAn" Method="pr_XoaThucAn">
+    <Parameter Name="maThucAn" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ShowDatMon" Method="ShowDatMon">
+    <Parameter Name="maTiec" Type="System.String" DbType="Char(10)" />
+    <ElementType Name="ShowDatMonResult">
+      <Column Name="MaTiec" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MaMA" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ThanhTien" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Max_BP" Method="Max_BP" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.Max_DatTiec" Method="Max_DatTiec" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.Max_DV" Method="Max_DV" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.Max_HD" Method="Max_HD" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.Max_KH" Method="Max_KH" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.Max_MA" Method="Max_MA" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.Max_NV" Method="Max_NV" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.Max_Sanh" Method="Max_Sanh" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.pr_AddSanhisDeleted" Method="pr_AddSanhisDeleted">
+    <Parameter Name="TenSanh" Parameter="tenSanh" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Tang" Parameter="tang" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="DonGia" Parameter="donGia" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="SucChua" Parameter="sucChua" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddMonAnisDeleted" Method="pr_AddMonAnisDeleted">
+    <Parameter Name="TenMA" Parameter="tenMA" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Gia" Parameter="gia" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="Loai" Parameter="loai" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="DonViTinh" Parameter="donViTinh" Type="System.String" DbType="NVarChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_XoaDichVu" Method="pr_XoaDichVu">
+    <Parameter Name="maDichVu" Type="System.String" DbType="Char(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.pr_AddDichVuisDeleted" Method="pr_AddDichVuisDeleted">
+    <Parameter Name="TenDV" Parameter="tenDV" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Gia" Parameter="gia" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
